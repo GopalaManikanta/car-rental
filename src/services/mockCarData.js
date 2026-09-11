@@ -9,7 +9,7 @@ export const INITIAL_CARS = [
     transmission: "Automatic",
     seatingCapacity: 5,
     availabilityStatus: "Available",
-    image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80",
     description: "Ultra-fast electric luxury sedan with autopilot capabilities and executive interior."
   },
   {
@@ -22,8 +22,8 @@ export const INITIAL_CARS = [
     transmission: "Automatic",
     seatingCapacity: 4,
     availabilityStatus: "Booked",
-    image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
-    description: "High-performance sports coupe featuring twin-turbo inline 6 and track dynamics."
+    image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    description: "High-performance sports coupe featuring twin-turbo inline 6 and signature BMW kidney grille."
   },
   {
     id: "car-103",
@@ -35,8 +35,8 @@ export const INITIAL_CARS = [
     transmission: "Automatic",
     seatingCapacity: 5,
     availabilityStatus: "Available",
-    image: "https://images.unsplash.com/photo-1520050206274-a1ae44613e6d?auto=format&fit=crop&w=800&q=80",
-    description: "Iconic luxury off-road SUV delivering powerful V8 performance and prestige status."
+    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80",
+    description: "Iconic luxury off-road SUV delivering powerful AMG V8 performance and prestige status."
   },
   {
     id: "car-104",
@@ -49,7 +49,7 @@ export const INITIAL_CARS = [
     seatingCapacity: 5,
     availabilityStatus: "Available",
     image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80",
-    description: "Futuristic electric grand tourer with dual motor AWD and 800V fast charging."
+    description: "Futuristic electric grand tourer featuring Audi four-rings emblem and 800V fast charging."
   },
   {
     id: "car-105",
@@ -74,8 +74,8 @@ export const INITIAL_CARS = [
     transmission: "Automatic",
     seatingCapacity: 5,
     availabilityStatus: "Available",
-    image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=800&q=80",
-    description: "Reliable, comfortable, and fuel-efficient hybrid midsize sedan ideal for long journeys."
+    image: "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=800&q=80",
+    description: "Reliable, comfortable, and fuel-efficient Toyota hybrid midsize sedan ideal for long journeys."
   },
   {
     id: "car-107",
@@ -88,7 +88,7 @@ export const INITIAL_CARS = [
     seatingCapacity: 4,
     availabilityStatus: "Booked",
     image: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=800&q=80",
-    description: "American muscle car powered by a roaring 5.0L V8 with 6-speed manual transmission."
+    description: "American muscle car powered by a roaring 5.0L V8 with Mustang pony grille badge."
   },
   {
     id: "car-108",
@@ -100,7 +100,59 @@ export const INITIAL_CARS = [
     transmission: "Automatic",
     seatingCapacity: 5,
     availabilityStatus: "Available",
-    image: "https://images.unsplash.com/photo-1662916892695-0010c732bcdd?auto=format&fit=crop&w=800&q=80",
-    description: "Award-winning retro-futuristic electric crossover with lounge-like interior space."
+    image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+    description: "Award-winning Hyundai electric crossover featuring signature modern parametric pixel styling."
+  },
+  {
+    id: "car-109",
+    brand: "Range Rover",
+    model: "Sport Autobiography",
+    year: 2024,
+    pricePerDay: 280,
+    fuelType: "Hybrid",
+    transmission: "Automatic",
+    seatingCapacity: 7,
+    availabilityStatus: "Available",
+    image: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80",
+    description: "Peerless luxury SUV offering supreme comfort, Range Rover front grille, and prestige seating."
+  },
+  {
+    id: "car-110",
+    brand: "Lexus",
+    model: "LC 500",
+    year: 2023,
+    pricePerDay: 210,
+    fuelType: "Petrol",
+    transmission: "Automatic",
+    seatingCapacity: 4,
+    availabilityStatus: "Available",
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80",
+    description: "Breathtaking Japanese V8 luxury coupe with signature Lexus spindle grille craftsmanship."
+  },
+  {
+    id: "car-111",
+    brand: "Lamborghini",
+    model: "Urus Performante",
+    year: 2024,
+    pricePerDay: 450,
+    fuelType: "Petrol",
+    transmission: "Automatic",
+    seatingCapacity: 5,
+    availabilityStatus: "Available",
+    image: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=80",
+    description: "Super sports utility vehicle featuring twin-turbo V8 producing 666 HP of unbridled raw power."
+  },
+  {
+    id: "car-112",
+    brand: "Volvo",
+    model: "XC90 Recharge",
+    year: 2024,
+    pricePerDay: 130,
+    fuelType: "Hybrid",
+    transmission: "Automatic",
+    seatingCapacity: 7,
+    availabilityStatus: "Maintenance",
+    image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
+    description: "Swedish safety flagship SUV with plug-in hybrid efficiency and Volvo diagonal emblem."
   }
 ];

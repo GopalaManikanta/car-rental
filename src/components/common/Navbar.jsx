@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Bell, Search } from 'lucide-react';
+import { Menu, Bell } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const Navbar = ({ setMobileOpen, pageTitle }) => {

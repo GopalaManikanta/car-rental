@@ -9,7 +9,6 @@ export const validateMobile = (mobile) => {
 };
 
 export const validateLicense = (license) => {
-  // Accepts standard alphanumeric driver license formats (e.g. DL1420110012345 or ABC-1234567)
   return String(license).trim().length >= 6;
 };
 

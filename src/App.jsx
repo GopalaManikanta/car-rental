@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from './context/AuthContext';
 import { CarProvider } from './context/CarContext';
 import { CustomerProvider } from './context/CustomerContext';
+import { BookingProvider } from './context/BookingContext';
 
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Sidebar from './components/common/Sidebar';
@@ -16,7 +17,12 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import CarsPage from './pages/CarsPage';
 import CarDetailPage from './pages/CarDetailPage';
+import AvailabilityPage from './pages/AvailabilityPage';
 import CustomersPage from './pages/CustomersPage';
+import BookingsPage from './pages/BookingsPage';
+import NewBookingPage from './pages/NewBookingPage';
+import ReportsPage from './pages/ReportsPage';
+import SettingsPage from './pages/SettingsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const AppLayout = ({ children, pageTitle }) => {
@@ -41,56 +47,112 @@ function App() {
     <AuthProvider>
       <CarProvider>
         <CustomerProvider>
-          <Router>
-            <Routes>
-              {/* Public Auth Routes */}
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+          <BookingProvider>
+            <Router>
+              <Routes>
+                {/* Public Auth Routes */}
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
 
-              {/* Protected App Routes */}
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Dashboard">
-                      <DashboardPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                {/* Protected App Routes */}
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Dashboard">
+                        <DashboardPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="/cars"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Car Inventory">
-                      <CarsPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                  path="/cars"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Car Inventory">
+                        <CarsPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="/cars/:id"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Car Details">
-                      <CarDetailPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                  path="/cars/:id"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Car Details">
+                        <CarDetailPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="/customers"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Customers">
-                      <CustomersPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                  path="/availability"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Fleet Availability">
+                        <AvailabilityPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/customers"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Customers">
+                        <CustomersPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/bookings"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Booking History">
+                        <BookingsPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/booking/new"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="New Rental Booking">
+                        <NewBookingPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/reports"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Reports & Analytics">
+                        <ReportsPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/settings"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="System Settings">
+                        <SettingsPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
               {/* Root redirect */}
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
@@ -113,6 +175,7 @@ function App() {
             pauseOnHover
             theme="light"
           />
+          </BookingProvider>
         </CustomerProvider>
       </CarProvider>
     </AuthProvider>

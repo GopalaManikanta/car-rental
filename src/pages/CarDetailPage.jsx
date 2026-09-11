@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useCars } from '../context/CarContext';
 import { useCustomers } from '../context/CustomerContext';
+import { useBooking } from '../context/BookingContext';
 import ConfirmDialog from '../components/common/ConfirmDialog';
 import Modal from '../components/common/Modal';
 import { toast } from 'react-toastify';
@@ -26,6 +27,7 @@ const CarDetailPage = () => {
   const navigate = useNavigate();
   const { getCarById, updateCar, deleteCar } = useCars();
   const { customers } = useCustomers();
+  const { addBooking } = useBooking();
 
   const car = getCarById(id);
 
@@ -61,10 +63,32 @@ const CarDetailPage = () => {
       toast.error('Please select a customer for this rental contract.');
       return;
     }
+
+    const today = new Date();
+    const returnDt = new Date();
+    returnDt.setDate(today.getDate() + Number(rentalDays));
+
+    const pickupDate = today.toISOString().split('T')[0];
+    const returnDate = returnDt.toISOString().split('T')[0];
+    const totalCost = car.pricePerDay * rentalDays;
+
+    // Create booking entry in BookingContext so it appears on Bookings Page!
+    addBooking({
+      customerId: selectedCustomerId,
+      carId: car.id,
+      pickupDate,
+      returnDate,
+      totalDays: Number(rentalDays),
+      totalCost,
+      status: 'Active'
+    });
+
+    updateCar(car.id, { availabilityStatus: 'Rented' });
+
     const customer = customers.find((c) => c.id === selectedCustomerId);
-    updateCar(car.id, { availabilityStatus: 'Booked' });
-    toast.success(`Successfully booked ${car.brand} ${car.model} for ${customer?.name || 'Customer'}!`);
+    toast.success(`🎉 Booked ${car.brand} ${car.model} for ${customer?.name || 'Customer'}! Added to Bookings Page.`);
     setIsRentModalOpen(false);
+    navigate('/bookings');
   };
 
   const handleDeleteConfirm = () => {

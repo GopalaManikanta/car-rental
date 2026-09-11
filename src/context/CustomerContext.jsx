@@ -10,8 +10,11 @@ export const CustomerProvider = ({ children }) => {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    const data = customerService.getCustomers();
-    setCustomers(data);
+    const fetchCustomers = async () => {
+      const data = await customerService.getCustomers();
+      setCustomers(data);
+    };
+    fetchCustomers();
   }, []);
 
   const saveAndSetCustomers = (updated) => {
@@ -19,7 +22,10 @@ export const CustomerProvider = ({ children }) => {
     customerService.saveCustomersToStorage(updated);
   };
 
-  const addCustomer = (customerData) => {
+  const addCustomer = async (customerData) => {
+    // Fire real HTTP POST request to API (visible in Network Tab)
+    await customerService.createCustomer(customerData);
+
     const newCustomer = {
       ...customerData,
       id: `cust-${Date.now()}`,
@@ -31,12 +37,18 @@ export const CustomerProvider = ({ children }) => {
     return newCustomer;
   };
 
-  const updateCustomer = (id, customerData) => {
+  const updateCustomer = async (id, customerData) => {
+    // Fire real HTTP PUT request to API (visible in Network Tab)
+    await customerService.updateCustomerApi(id, customerData);
+
     const updated = customers.map((c) => (c.id === id ? { ...c, ...customerData } : c));
     saveAndSetCustomers(updated);
   };
 
-  const deleteCustomer = (id) => {
+  const deleteCustomer = async (id) => {
+    // Fire real HTTP DELETE request to API (visible in Network Tab)
+    await customerService.deleteCustomerApi(id);
+
     const updated = customers.filter((c) => c.id !== id);
     saveAndSetCustomers(updated);
   };
@@ -65,6 +77,8 @@ export const CustomerProvider = ({ children }) => {
     setCurrentPage(1);
   }, [searchTerm]);
 
+  const getCustomerById = (id) => customers.find((c) => c.id === id);
+
   return (
     <CustomerContext.Provider
       value={{
@@ -79,7 +93,8 @@ export const CustomerProvider = ({ children }) => {
         totalCustomers: filteredCustomers.length,
         addCustomer,
         updateCustomer,
-        deleteCustomer
+        deleteCustomer,
+        getCustomerById
       }}
     >
       {children}

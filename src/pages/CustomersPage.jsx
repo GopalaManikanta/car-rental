@@ -79,7 +79,7 @@ const CustomersPage = () => {
             <Users className="w-7 h-7 text-orange-500" /> Customer Management
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Maintain registered driver profiles, verify licenses, and monitor active customer rentals.
+            Maintain registered customer profiles, verify driving licenses, and monitor active customer rentals.
           </p>
         </div>
 
@@ -132,9 +132,18 @@ const CustomersPage = () => {
                   <tr key={c.id} className="hover:bg-orange-50/40 transition">
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-orange-500 to-amber-600 flex items-center justify-center font-bold text-white shadow">
-                          {c.name.charAt(0).toUpperCase()}
-                        </div>
+                        <img
+                          src={
+                            c.image ||
+                            `https://ui-avatars.com/api/?name=${encodeURIComponent(c.name)}&background=f97316&color=fff`
+                          }
+                          alt={c.name}
+                          className="w-10 h-10 rounded-full object-cover border-2 border-orange-200 shadow-xs shrink-0"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(c.name)}&background=f97316&color=fff`;
+                          }}
+                        />
                         <div>
                           <p className="font-bold text-slate-900">{c.name}</p>
                           <p className="text-[11px] text-slate-400 font-mono">ID: {c.id}</p>

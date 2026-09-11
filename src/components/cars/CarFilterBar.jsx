@@ -12,6 +12,8 @@ const CarFilterBar = () => {
     setFuelFilter,
     transmissionFilter,
     setTransmissionFilter,
+    statusFilter,
+    setStatusFilter,
     sortBy,
     setSortBy,
     uniqueBrands
@@ -22,6 +24,7 @@ const CarFilterBar = () => {
     setBrandFilter('All');
     setFuelFilter('All');
     setTransmissionFilter('All');
+    setStatusFilter('All');
     setSortBy('default');
   };
 
@@ -30,6 +33,7 @@ const CarFilterBar = () => {
     brandFilter !== 'All' ||
     fuelFilter !== 'All' ||
     transmissionFilter !== 'All' ||
+    statusFilter !== 'All' ||
     sortBy !== 'default';
 
   return (
@@ -48,7 +52,7 @@ const CarFilterBar = () => {
         </div>
 
         {/* Filters Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
           {/* Brand Filter */}
           <div className="relative">
             <select
@@ -94,6 +98,21 @@ const CarFilterBar = () => {
               <option value="All">Trans: All</option>
               <option value="Automatic">Automatic</option>
               <option value="Manual">Manual</option>
+            </select>
+            <Filter className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
+          </div>
+
+          {/* Status Filter */}
+          <div className="relative">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 text-xs font-medium focus:outline-none focus:border-orange-500 focus:bg-white appearance-none pr-8 cursor-pointer"
+            >
+              <option value="All">Status: All</option>
+              <option value="Available">Available</option>
+              <option value="Rented">Rented</option>
+              <option value="Maintenance">Maintenance</option>
             </select>
             <Filter className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
           </div>

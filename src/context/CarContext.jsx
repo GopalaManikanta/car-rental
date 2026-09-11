@@ -13,6 +13,7 @@ export const CarProvider = ({ children }) => {
   const [brandFilter, setBrandFilter] = useState('All');
   const [fuelFilter, setFuelFilter] = useState('All');
   const [transmissionFilter, setTransmissionFilter] = useState('All');
+  const [statusFilter, setStatusFilter] = useState('All');
   const [sortBy, setSortBy] = useState('default');
 
   const fetchCars = async () => {
@@ -37,7 +38,10 @@ export const CarProvider = ({ children }) => {
     carService.saveCarsToStorage(updatedCars);
   };
 
-  const addCar = (newCarData) => {
+  const addCar = async (newCarData) => {
+    // Fire real HTTP POST request to API (visible in Network Tab)
+    await carService.createCar(newCarData);
+
     const newCar = {
       ...newCarData,
       id: `car-${Date.now()}`,
@@ -49,12 +53,18 @@ export const CarProvider = ({ children }) => {
     return newCar;
   };
 
-  const updateCar = (id, updatedData) => {
+  const updateCar = async (id, updatedData) => {
+    // Fire real HTTP PUT request to API (visible in Network Tab)
+    await carService.updateCarApi(id, updatedData);
+
     const updated = cars.map((car) => (car.id === id ? { ...car, ...updatedData } : car));
     saveAndSetCars(updated);
   };
 
-  const deleteCar = (id) => {
+  const deleteCar = async (id) => {
+    // Fire real HTTP DELETE request to API (visible in Network Tab)
+    await carService.deleteCarApi(id);
+
     const updated = cars.filter((car) => car.id !== id);
     saveAndSetCars(updated);
   };
@@ -74,8 +84,10 @@ export const CarProvider = ({ children }) => {
         const matchesFuel = fuelFilter === 'All' || car.fuelType.toLowerCase() === fuelFilter.toLowerCase();
         const matchesTrans =
           transmissionFilter === 'All' || car.transmission.toLowerCase() === transmissionFilter.toLowerCase();
+        const matchesStatus = 
+          statusFilter === 'All' || car.availabilityStatus.toLowerCase() === statusFilter.toLowerCase();
 
-        return matchesSearch && matchesBrand && matchesFuel && matchesTrans;
+        return matchesSearch && matchesBrand && matchesFuel && matchesTrans && matchesStatus;
       })
       .sort((a, b) => {
         if (sortBy === 'price-low') return a.pricePerDay - b.pricePerDay;
@@ -84,7 +96,7 @@ export const CarProvider = ({ children }) => {
         if (sortBy === 'brand') return a.brand.localeCompare(b.brand);
         return 0;
       });
-  }, [cars, searchTerm, brandFilter, fuelFilter, transmissionFilter, sortBy]);
+  }, [cars, searchTerm, brandFilter, fuelFilter, transmissionFilter, statusFilter, sortBy]);
 
   const uniqueBrands = useMemo(() => {
     const brands = cars.map((c) => c.brand);
@@ -107,6 +119,8 @@ export const CarProvider = ({ children }) => {
         setFuelFilter,
         transmissionFilter,
         setTransmissionFilter,
+        statusFilter,
+        setStatusFilter,
         sortBy,
         setSortBy,
         addCar,

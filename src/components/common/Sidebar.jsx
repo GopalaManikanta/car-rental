@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Car, Users, LogOut, Shield, Zap } from 'lucide-react';
+import { LayoutDashboard, Car, Users, LogOut, Shield, Zap, ClipboardList, BarChart3, Settings, CalendarCheck2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
@@ -15,7 +15,11 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Car Fleet', path: '/cars', icon: Car },
-    { name: 'Customers', path: '/customers', icon: Users }
+    { name: 'Car Availability', path: '/availability', icon: CalendarCheck2 },
+    { name: 'Customers', path: '/customers', icon: Users },
+    { name: 'Bookings', path: '/bookings', icon: ClipboardList },
+    { name: 'Reports & Analytics', path: '/reports', icon: BarChart3 },
+    { name: 'System Settings', path: '/settings', icon: Settings }
   ];
 
   return (

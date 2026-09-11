@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Fuel, Gauge, Users, Calendar, Edit3, Trash2, Eye, DollarSign } from 'lucide-react';
 
-const CarCard = ({ car, onEdit, onDelete }) => {
+const CarCard = ({ car, onEdit, onDelete, onBook }) => {
   const navigate = useNavigate();
 
   const getStatusBadge = (status) => {
@@ -10,6 +10,7 @@ const CarCard = ({ car, onEdit, onDelete }) => {
       case 'Available':
         return 'bg-emerald-50 text-emerald-700 border-emerald-200';
       case 'Booked':
+      case 'Rented':
         return 'bg-amber-50 text-amber-700 border-amber-200';
       case 'Maintenance':
         return 'bg-rose-50 text-rose-700 border-rose-200';
@@ -86,12 +87,21 @@ const CarCard = ({ car, onEdit, onDelete }) => {
 
         {/* Action Buttons */}
         <div className="flex items-center gap-2 pt-1">
+          {car.availabilityStatus === 'Available' && (
+            <button
+              onClick={() => onBook ? onBook(car) : navigate('/booking/new', { state: { carId: car.id } })}
+              className="flex-1 flex items-center justify-center gap-1 py-2.5 px-3 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold rounded-xl text-xs transition duration-200 shadow-sm"
+            >
+              <span>Book Now</span>
+            </button>
+          )}
+
           <button
             onClick={() => navigate(`/cars/${car.id}`)}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl text-xs transition duration-200 shadow-sm"
+            className="p-2.5 bg-slate-100 hover:bg-orange-50 text-slate-600 hover:text-orange-600 border border-slate-200 rounded-xl transition text-xs font-semibold flex items-center gap-1"
+            title="View Details"
           >
             <Eye className="w-4 h-4" />
-            <span>Details</span>
           </button>
 
           <button
