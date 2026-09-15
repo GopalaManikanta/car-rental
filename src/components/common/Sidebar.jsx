@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Car, Users, LogOut, Shield, Zap, ClipboardList, BarChart3, Settings, CalendarCheck2 } from 'lucide-react';
+import { NavLink, Link } from 'react-router-dom';
+import { LayoutDashboard, Car, Users, LogOut, Shield, Zap, ClipboardList, BarChart3, Settings, CalendarCheck2, User } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
@@ -19,6 +19,7 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
     { name: 'Customers', path: '/customers', icon: Users },
     { name: 'Bookings', path: '/bookings', icon: ClipboardList },
     { name: 'Reports & Analytics', path: '/reports', icon: BarChart3 },
+    { name: 'My Profile', path: '/profile', icon: User },
     { name: 'System Settings', path: '/settings', icon: Settings }
   ];
 
@@ -45,7 +46,7 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
             </div>
             <div>
               <h1 className="font-extrabold text-lg text-slate-900 tracking-wider flex items-center gap-1">
-                VELOCITY <Zap className="w-3.5 h-3.5 text-orange-500 fill-orange-500" />
+                LEO <Zap className="w-3.5 h-3.5 text-orange-500 fill-orange-500" />
               </h1>
               <p className="text-[10px] uppercase font-bold text-orange-600 tracking-widest">Car Rentals</p>
             </div>
@@ -53,17 +54,26 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
         </div>
 
         {/* User Card Summary */}
-        <div className="p-4 mx-3 my-4 bg-orange-50/80 border border-orange-200/60 rounded-xl flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center font-bold text-white text-sm shadow-md">
-            {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+        <Link
+          to="/profile"
+          onClick={() => setMobileOpen(false)}
+          className="p-3 mx-3 my-3 bg-orange-50/80 hover:bg-orange-100/70 border border-orange-200/60 rounded-2xl flex items-center gap-3 transition cursor-pointer group"
+          title="View My Profile"
+        >
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center font-bold text-white text-sm shadow-md overflow-hidden shrink-0">
+            {user?.avatar ? (
+              <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+            ) : (
+              user?.name ? user.name.charAt(0).toUpperCase() : 'U'
+            )}
           </div>
-          <div className="overflow-hidden">
-            <h4 className="text-sm font-semibold text-slate-900 truncate">{user?.name || 'Manager'}</h4>
-            <p className="text-xs text-orange-600 flex items-center gap-1 truncate font-medium">
+          <div className="overflow-hidden flex-1">
+            <h4 className="text-sm font-bold text-slate-900 truncate group-hover:text-orange-600 transition">{user?.name || 'Manager'}</h4>
+            <p className="text-[11px] text-orange-600 flex items-center gap-1 truncate font-medium">
               <Shield className="w-3 h-3" /> {user?.role || 'Fleet Manager'}
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* Navigation Items */}
         <nav className="flex-1 px-3 space-y-1.5 overflow-y-auto custom-scrollbar">

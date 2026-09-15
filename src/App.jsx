@@ -23,6 +23,7 @@ import BookingsPage from './pages/BookingsPage';
 import NewBookingPage from './pages/NewBookingPage';
 import ReportsPage from './pages/ReportsPage';
 import SettingsPage from './pages/SettingsPage';
+import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const AppLayout = ({ children, pageTitle }) => {
@@ -149,6 +150,17 @@ function App() {
                     <ProtectedRoute>
                       <AppLayout pageTitle="System Settings">
                         <SettingsPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="My Profile">
+                        <ProfilePage />
                       </AppLayout>
                     </ProtectedRoute>
                   }

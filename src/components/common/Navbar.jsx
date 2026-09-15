@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, Bell } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -26,16 +27,24 @@ const Navbar = ({ setMobileOpen, pageTitle }) => {
 
       <div className="flex items-center gap-3 sm:gap-4">
         {/* Notification Icon */}
-        <button className="relative p-2 text-slate-500 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition">
+        <button className="relative p-2 text-slate-500 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition cursor-pointer">
           <Bell className="w-5 h-5" />
           <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-orange-500 rounded-full ring-2 ring-white"></span>
         </button>
 
         {/* User Avatar */}
         <div className="flex items-center gap-3 pl-2 border-l border-slate-200">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-600 flex items-center justify-center font-bold text-white text-sm shadow-md">
-            {user?.name ? user.name.charAt(0).toUpperCase() : 'A'}
-          </div>
+          <Link
+            to="/profile"
+            className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-600 flex items-center justify-center font-bold text-white text-sm shadow-md hover:scale-105 transition overflow-hidden cursor-pointer"
+            title="My Profile"
+          >
+            {user?.avatar ? (
+              <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+            ) : (
+              user?.name ? user.name.charAt(0).toUpperCase() : 'A'
+            )}
+          </Link>
         </div>
       </div>
     </header>

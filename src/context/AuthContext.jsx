@@ -83,13 +83,46 @@ export const AuthProvider = ({ children }) => {
     return { success: true, message: 'Password reset successfully! You can now log in.' };
   };
 
+  const updateProfile = (profileData) => {
+    if (!user) return { success: false, message: 'No user logged in.' };
+
+    const updatedSessionUser = {
+      ...user,
+      ...profileData
+    };
+
+    setUser(updatedSessionUser);
+    localStorage.setItem('car_rental_user', JSON.stringify(updatedSessionUser));
+
+    // Update in registeredUsers list as well
+    const updatedUsers = registeredUsers.map((u) => {
+      if (u.email.toLowerCase() === user.email.toLowerCase()) {
+        return {
+          ...u,
+          name: profileData.name || u.name,
+          phone: profileData.phone || u.phone,
+          bio: profileData.bio || u.bio,
+          avatar: profileData.avatar || u.avatar,
+          department: profileData.department || u.department,
+          role: profileData.role || u.role
+        };
+      }
+      return u;
+    });
+
+    setRegisteredUsers(updatedUsers);
+    localStorage.setItem('car_rental_all_users', JSON.stringify(updatedUsers));
+
+    return { success: true };
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem('car_rental_user');
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, register, resetPassword, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, register, resetPassword, updateProfile, logout }}>
       {children}
     </AuthContext.Provider>
   );
